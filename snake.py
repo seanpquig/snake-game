@@ -21,8 +21,11 @@ class Snake:
         return zip(self.body_characters, self.body_coordinates)
 
     def update(self, move: Move):
-        head_chars = self.body_characters[-2:]
-
+        '''
+        Update internal snake data based on player move. Adjust tail, head,
+        and body coordinates. Adjust body characters based on prior snake
+        postion and new direction it's facing.
+        '''
         if move == Move.LEFT.value:
             self.head = (self.head[0], self.head[1] - 1)
             head_chars = ['-', '<']

@@ -34,7 +34,15 @@ class Board:
         self.draw_apples()
 
     def __str__(self) -> str:
-        return '\n'.join([f"| {' | '.join(row)} |" for row in self.matrix])
+        '''Custom print method for redndering board state in terminal.'''
+        row_border = ' - '.join(['+'] * (self.size + 1))
+        print_rows = [row_border]
+
+        for row in self.matrix:
+            print_rows.append(f"| {' | '.join(row)} |")
+            print_rows.append(row_border)
+
+        return '\n'.join(print_rows)
 
     def draw_snake(self):
         for char, coords in self.snake.zipped_chars_and_coordinates():
@@ -53,7 +61,7 @@ class Board:
                 apples_placed += 1
 
     def process_move(self, move: Move):
-        """
+        '''
         Process a desired game move:
             - check if it causes the snake to hit the wall
             - check if snake can move in direction based on its' current orientation
@@ -61,8 +69,8 @@ class Board:
             - update the snake's positon coordinates and body characters
             - re-draw the snake on the board matrix
 
-        Return boolean idicating if game is over or should continue
-        """
+        Return boolean idicating if game is over or should continue.
+        '''
         snake_head_char = self.snake.head_char()
 
         # Check if move is valid
