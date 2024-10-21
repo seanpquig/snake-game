@@ -50,7 +50,7 @@ class Board:
 
             if cell_val == ' ':
                 self.matrix[i][j] = APPLE_CHAR
-                apples_drawn += 1
+                apples_placed += 1
 
     def process_move(self, move: Move):
         """
