@@ -1,4 +1,5 @@
-from board import Board, VALID_MOVES
+from board import Board
+from moves import VALID_MOVES
 
 
 def main():

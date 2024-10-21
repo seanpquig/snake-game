@@ -1,15 +1,9 @@
 import random
+from moves import Move
 from snake import Snake
 
 SNAKE_LEN = 4
 APPLE_CHAR = '@'
-
-# Characters representing directional movement around game board
-LEFT = 'a'
-RIGHT = 'd'
-UP = 'w'
-DOWN = 's'
-VALID_MOVES = [LEFT, RIGHT, UP, DOWN]
 
 
 class Board:
@@ -57,14 +51,17 @@ class Board:
                 self.matrix[i][j] = APPLE_CHAR
                 apples_drawn += 1
 
-    def process_move(self, move):
-        if move == LEFT and self.snake.head[1] > 0:
+    def process_move(self, move: Move):
+        if move == Move.LEFT.value and self.snake.head[1] > 0:
             pass
-        elif move == RIGHT and self.snake.head[1] < self.size - 1:
+        elif move == Move.RIGHT.value and self.snake.head[1] < self.size - 1:
             pass
-        elif move == UP and self.snake.head[0] > 0:
+        elif move == Move.UP.value and self.snake.head[0] > 0:
             pass
-        elif move == DOWN and self.snake.head[0] < self.size - 1:
+        elif move == Move.DOWN.value and self.snake.head[0] < self.size - 1:
             pass
         else:
             raise Exception('Snake hit wall.  GAME OVER!')
+
+        self.snake.update(move)
+        self.snake.info()
