@@ -7,4 +7,4 @@ class Move(Enum):
     UP = 'w'
     DOWN = 's'
 
-VALID_MOVES = [e.value for e in Move]
+VALID_MOVES = [m.value for m in Move]

@@ -8,15 +8,16 @@ def main():
     print('Initial board:')
     print(board)
 
-    print('Game starting. Good Luck!')
-
     game_over = False
     while not game_over:
         move = input()
         if move in VALID_MOVES:
-            board.process_move(move)
+            game_over = board.process_move(move)
             print('\n')
             print(board)
+
+            if game_over:
+                print('\nYOU WON!')
         else:
             print(f'Invalid move (must be one of {VALID_MOVES})')
 

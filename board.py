@@ -65,3 +65,6 @@ class Board:
 
         self.snake.update(move)
         self.snake.info()
+
+        # Return game over status
+        return False
