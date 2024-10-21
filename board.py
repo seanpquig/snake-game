@@ -3,6 +3,7 @@ from moves import Move
 from snake import Snake
 
 SNAKE_LEN = 4
+EMPTY_CHAR = ' '
 APPLE_CHAR = '@'
 
 
@@ -24,7 +25,7 @@ class Board:
         self.num_apples = num_apples
 
         # setup empty board
-        self.matrix = [[' ' for _ in range(size)] for _ in range(size)]
+        self.matrix = [[EMPTY_CHAR for _ in range(size)] for _ in range(size)]
 
         # draw snake on board
         self.draw_snake()
@@ -41,9 +42,9 @@ class Board:
             self.matrix[i][j] = char
 
     def draw_apples(self):
-        apples_drawn = 0
+        apples_placed = 0
 
-        while apples_drawn < self.num_apples:
+        while apples_placed < self.num_apples:
             i, j = random.randint(0, self.size - 1), random.randint(0, self.size - 1)
             cell_val = self.matrix[i][j]
 
@@ -52,19 +53,54 @@ class Board:
                 apples_drawn += 1
 
     def process_move(self, move: Move):
+        """
+        Process a desired game move:
+            - check if it causes the snake to hit the wall
+            - check if snake can move in direction based on its' current orientation
+            - check if snake eats and apple on the board
+            - update the snake's positon coordinates and body characters
+            - re-draw the snake on the board matrix
+
+        Return boolean idicating if game is over or should continue
+        """
+        snake_head_char = self.snake.head_char()
+
+        # Check if move is valid
         if move == Move.LEFT.value and self.snake.head[1] > 0:
-            pass
+            if snake_head_char == '>':
+                print("Snake can't move backwards!")
+                return False
         elif move == Move.RIGHT.value and self.snake.head[1] < self.size - 1:
-            pass
+            if snake_head_char == '<':
+                print("Snake can't move backwards!")
+                return False
         elif move == Move.UP.value and self.snake.head[0] > 0:
-            pass
+            if snake_head_char == 'v':
+                print("Snake can't move backwards!")
+                return False
         elif move == Move.DOWN.value and self.snake.head[0] < self.size - 1:
-            pass
+            if snake_head_char == '^':
+                print("Snake can't move backwards!")
+                return False
         else:
             raise Exception('Snake hit wall.  GAME OVER!')
 
+        # Clear prior snake tail position
+        tail_i, tail_j = self.snake.tail
+        self.matrix[tail_i][tail_j] = EMPTY_CHAR
+
+        # Update snake data based on move
         self.snake.update(move)
-        self.snake.info()
+
+        # Check if an apple is eaten
+        head_i, head_j = self.snake.head
+        if self.matrix[head_i][head_j] == APPLE_CHAR:
+            self.apples_eaten += 1
+            self.num_apples -= 1
+            print(f'Apple eaten! (Total: {self.apples_eaten}, Remaining: {self.num_apples})')
+
+        # Re-draw snake on board
+        self.draw_snake()
 
         # Return game over status
-        return False
+        return self.num_apples == 0

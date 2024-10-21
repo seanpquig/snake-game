@@ -13,11 +13,11 @@ def main():
         move = input()
         if move in VALID_MOVES:
             game_over = board.process_move(move)
-            print('\n')
-            print(board)
-
             if game_over:
                 print('\nYOU WON!')
+            else:
+                print('\n')
+                print(board)
         else:
             print(f'Invalid move (must be one of {VALID_MOVES})')
 
