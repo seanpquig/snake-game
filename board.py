@@ -56,7 +56,7 @@ class Board:
             i, j = random.randint(0, self.size - 1), random.randint(0, self.size - 1)
             cell_val = self.matrix[i][j]
 
-            if cell_val == ' ':
+            if cell_val == EMPTY_CHAR:
                 self.matrix[i][j] = APPLE_CHAR
                 apples_placed += 1
 
@@ -65,7 +65,7 @@ class Board:
         Process a desired game move:
             - check if it causes the snake to hit the wall
             - check if snake can move in direction based on its' current orientation
-            - check if snake eats and apple on the board
+            - check if snake eats an apple on the board
             - update the snake's positon coordinates and body characters
             - re-draw the snake on the board matrix
 

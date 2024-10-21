@@ -11,6 +11,7 @@ class Snake:
         pass
 
     def info(self):
+        '''Snake data info for debugging purposes.'''
         print(f'Body coordinates: {self.body_coordinates}')
         print(f'Body characters: {self.body_characters}')
 
