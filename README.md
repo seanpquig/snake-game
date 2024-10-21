@@ -3,10 +3,11 @@ Terminal based game of Snake.
 
 ### Rules and gameplay:
 
-1. Move ASCII snake via WASD keyboard movement. Enter key must be pressed to submit each turn.
-2. Snake can't move backwards.
-3. You lose if snake hits wall.
-4. Eat all `@` apples to win.
+1. Move ASCII snake via WASD keyboard movement.
+2. Enter key must be pressed to submit each turn.
+3. Snake can't move backwards.
+4. You lose if snake hits wall.
+5. Eat all `@` apples to win.
 
 ### Run game
 Assumes Python 3.4 or higher
